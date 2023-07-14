@@ -36,7 +36,7 @@ function onSearch(evt) {
 }
 
 async function renderContainer(value, page) {
-    try {
+  try {
     const { hits, totalHits } = await fetchImages(value, page);
     checkTotalPages(totalHits);
 
@@ -52,7 +52,6 @@ async function renderContainer(value, page) {
     wrapper.insertAdjacentHTML('beforeend', generateContentList(hits));
     window.addEventListener('scroll', scroll);
     lightbox.refresh();
-
   } catch (error) {
     console.log(error);
   }
@@ -63,26 +62,24 @@ function checkTotalPages(totalHits) {
 }
 
 function scroll() {
-    const contentHeight = wrapper.offsetHeight - 500;
-    const yOffset = window.pageYOffset;
-    const viewportHeight = window.innerHeight;
-    const scrolledHeight = yOffset + viewportHeight;
-  
-    if (scrolledHeight >= contentHeight) {
-      page += 1;
-      window.removeEventListener('scroll', scroll);
-  
-      if (page > totalPage) {
-        Notify.warning(
-          "We're sorry, but you've reached the end of search results."
-        );
-        return;
-      }
-  
-      renderContainer(searchQueryValue, page).then(() => {
-        window.addEventListener('scroll', scroll);
-      });
+  const contentHeight = wrapper.offsetHeight - 500;
+  const yOffset = window.pageYOffset;
+  const viewportHeight = window.innerHeight;
+  const scrolledHeight = yOffset + viewportHeight;
+
+  if (scrolledHeight >= contentHeight) {
+    page += 1;
+    window.removeEventListener('scroll', scroll);
+
+    if (page > totalPage) {
+      Notify.warning(
+        "We're sorry, but you've reached the end of search results."
+      );
+      return;
     }
+
+    renderContainer(searchQueryValue, page).then(() => {
+      window.addEventListener('scroll', scroll);
+    });
   }
-  
-  
+}

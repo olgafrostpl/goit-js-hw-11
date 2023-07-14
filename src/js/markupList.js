@@ -1,7 +1,7 @@
 function createCardMarkup(imageCard) {
-return `
+  return `
 <div class="photo-card">
-    <a href="${imageCard.largeImageURL}"><img src="${imageCard.webformatURL}" alt="${imageCard.tags}" class="img"/></a>
+    <a href="${imageCard.largeImageURL}"><img src="${imageCard.webformatURL}" alt="${imageCard.tags}" loading="lazy" class="img"/></a>
     <div class="info">
     <p class="info-item">
         <b>Likes</b>
@@ -24,7 +24,7 @@ return `
 }
 
 function generateContentList(array) {
-return array.map(createCardMarkup).join('');
+  return array.map(createCardMarkup).join('');
 }
 
 export { generateContentList };
